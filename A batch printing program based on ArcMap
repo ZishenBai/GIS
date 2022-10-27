@@ -4,10 +4,10 @@ import os
 import time
 
 InputmxdFile=u"D:\\Your ArcMap file.mxd"
-PM1=u"D:\\00_test_02\\Level_01\\"
-PM2=u"D:\\00_test_02\\Level_02\\"
-PM3=u"D:\\00_test_02\\Level_03\\"
-PM4=u"D:\\00_test_02\\Level_04\\"
+PM1=u"D:\\Test\\Level_01\\"
+PM2=u"D:\\Test\\Level_02\\"
+PM3=u"D:\\Test\\Level_03\\"
+PM4=u"D:\\Test\\Level_04\\"
 strtime1=time.time
 mxdA1 = arcpy.mapping.MapDocument(InputmxdFile)
 df = arcpy.mapping.ListDataFrames(mxdA1)[0]
