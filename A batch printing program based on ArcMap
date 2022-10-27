@@ -1,0 +1,35 @@
+# coding=utf-8
+import arcpy
+import os
+import time
+
+InputmxdFile=u"D:\\Your ArcMap file.mxd"
+PM1=u"D:\\00_test_02\\Level_01\\"
+PM2=u"D:\\00_test_02\\Level_02\\"
+PM3=u"D:\\00_test_02\\Level_03\\"
+PM4=u"D:\\00_test_02\\Level_04\\"
+strtime1=time.time
+mxdA1 = arcpy.mapping.MapDocument(InputmxdFile)
+df = arcpy.mapping.ListDataFrames(mxdA1)[0]
+lyr = arcpy.mapping.ListLayers(mxdA1, "", df)[0]
+cursor = arcpy.SearchCursor(lyr)
+row = cursor.next()
+while row:
+    print row.getValue("XH")
+    print row.getValue("PM")
+    geo = row.shape
+    print geo.extent
+    df.panToExtent(geo.extent)
+    if row.getValue("PM")>=48.750000 and row.getValue("PM")<=52.000000:
+        arcpy.mapping.ExportToJPEG(mxdA1, PM1+str(row.getValue("FID"))+".jpg", resolution=300)
+    if row.getValue("PM")>=52.003782 and row.getValue("PM")<=54.000000:
+        arcpy.mapping.ExportToJPEG(mxdA1, PM2+str(row.getValue("FID"))+".jpg", resolution=300)
+    if row.getValue("PM")>=54.000017 and row.getValue("PM")<=57.000000:
+        arcpy.mapping.ExportToJPEG(mxdA1, PM3+str(row.getValue("FID"))+".jpg", resolution=300)
+    if row.getValue("PM")>=57.001009 and row.getValue("PM")<=60.500000:
+        arcpy.mapping.ExportToJPEG(mxdA1, PM4+str(row.getValue("FID"))+".jpg", resolution=300)
+    print str(row.getValue("FID"))+u"Print success！"
+    row = cursor.next()
+endtime1=time.time()
+yxtime=endtime1-strtime1
+print u"Mission completed"
